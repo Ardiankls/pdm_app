@@ -14,18 +14,29 @@ class _LoginState extends State<Login> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        child: Stack(
+        child: Column(
           children: [
             Container(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(40, 120, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 120, 90, 0),
                 child: Text(
                   'Welcome Back!',
                   style: TextStyle(fontSize: 30, fontStyle: FontStyle.normal),
                 ),
               ),
             ),
-            Container()
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 120, 0, 0),
+              child: Stack(
+                children: [
+                  Container(
+                      height: 316,
+                      decoration: BoxDecoration(
+                          color: Color(0xFF0E1621),
+                          borderRadius: BorderRadius.circular(25))),
+                ],
+              ),
+            ),
           ],
         ),
       ),
