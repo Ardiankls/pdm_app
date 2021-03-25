@@ -5,3 +5,5 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 part 'splash.dart';
 part 'login.dart';
+part 'signup.dart';
+part 'home.dart';
