@@ -28,10 +28,10 @@ class _LoginState extends State<Login> {
               style: TextStyle(fontSize: 30, fontStyle: FontStyle.normal),
             ),
             SizedBox(
-              height: 100,
+              height: 102,
             ),
             Container(
-              height: 326,
+              height: 324,
               width: double.infinity,
               decoration: BoxDecoration(
                   color: Color(0xFF0E1621),
