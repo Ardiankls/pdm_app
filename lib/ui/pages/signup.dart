@@ -144,7 +144,7 @@ class _SignupState extends State<Signup> {
                             ),
                           ),
                           SizedBox(height: 24),
-                          ElevatedButton.icon(
+                          ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
                                 //melanjutkan ke tahap berikutnya
@@ -156,8 +156,7 @@ class _SignupState extends State<Signup> {
                                     textColor: Colors.white);
                               }
                             },
-                            icon: Icon(Icons.app_registration),
-                            label: Text("Signup"),
+                            child: Text("Signup"),
                             style: ElevatedButton.styleFrom(
                               primary: Color(0xFF7041FF),
                               elevation: 0,

@@ -116,7 +116,8 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           SizedBox(height: 24),
-                          ElevatedButton.icon(
+                          ElevatedButton(
+                            child: Text("Login"),
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
                                 //melanjutkan ke tahap berikutnya
@@ -128,8 +129,6 @@ class _LoginState extends State<Login> {
                                     textColor: Colors.white);
                               }
                             },
-                            icon: Icon(Icons.login_rounded),
-                            label: Text("Login"),
                             style: ElevatedButton.styleFrom(
                               primary: Color(0xFF7041FF),
                               elevation: 0,
