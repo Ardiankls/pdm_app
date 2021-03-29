@@ -28,10 +28,10 @@ class _LoginState extends State<Login> {
               style: TextStyle(fontSize: 30, fontStyle: FontStyle.normal),
             ),
             SizedBox(
-              height: 50,
+              height: 100,
             ),
             Container(
-              height: 376,
+              height: 326,
               width: double.infinity,
               decoration: BoxDecoration(
                   color: Color(0xFF0E1621),
@@ -96,9 +96,11 @@ class _LoginState extends State<Login> {
                                   border: OutlineInputBorder(),
                                   suffixIcon: new GestureDetector(
                                     onTap: () {
-                                      setState(() {
-                                        isVisible = !isVisible;
-                                      });
+                                      setState(
+                                        () {
+                                          isVisible = !isVisible;
+                                        },
+                                      );
                                     },
                                     child: Icon(isVisible
                                         ? Icons.visibility
@@ -136,10 +138,16 @@ class _LoginState extends State<Login> {
                           Container(
                             margin: const EdgeInsets.only(top: 20.0),
                             child: RichText(
-                                text: TextSpan(
-                              text: 'Signup Here',
-                              style: TextStyle(color: Colors.white),
-                            )),
+                              text: TextSpan(
+                                text: 'Signup Here',
+                                style: TextStyle(color: Colors.white),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.pushReplacementNamed(
+                                        context, Signup.routeName);
+                                  },
+                              ),
+                            ),
                           )
                         ],
                       ),
