@@ -1,6 +1,7 @@
 part of 'pages.dart';
 
 class Signup extends StatefulWidget {
+  static const String routeName = "/signup";
   @override
   _SignupState createState() => _SignupState();
 }
@@ -22,9 +23,9 @@ class _SignupState extends State<Signup> {
         child: Container(
           margin: const EdgeInsets.only(top: 130.0),
           child: Column(children: [
-            Text(
-              'Welcome Back!',
-              style: TextStyle(fontSize: 30, fontStyle: FontStyle.normal),
+            Image.asset(
+              "assets/images/PDMLogo.png",
+              height: 36,
             ),
             SizedBox(
               height: 50,
@@ -43,7 +44,7 @@ class _SignupState extends State<Signup> {
                     Container(
                       margin: const EdgeInsets.only(top: 30.0, bottom: 30.0),
                       child: Text(
-                        'Login',
+                        'Signup',
                         style: TextStyle(
                             fontWeight: FontWeight.normal, fontSize: 20),
                       ),
@@ -62,6 +63,36 @@ class _SignupState extends State<Signup> {
                                     new EdgeInsets.symmetric(vertical: 1.0),
                                 labelText: "Email",
                                 prefixIcon: Icon(Icons.mail_outline_rounded),
+                                border: OutlineInputBorder(),
+                              ),
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Please fill the field!";
+                                } else {
+                                  if (!EmailValidator.validate(value)) {
+                                    return "Email isn't valid!";
+                                  } else {
+                                    return null;
+                                  }
+                                }
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 30, left: 30),
+                            child: TextFormField(
+                              controller: ctrlEmail,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                contentPadding:
+                                    new EdgeInsets.symmetric(vertical: 1.0),
+                                labelText: "Username",
+                                prefixIcon: Icon(Icons.person_outline),
                                 border: OutlineInputBorder(),
                               ),
                               autovalidateMode:
@@ -125,8 +156,8 @@ class _SignupState extends State<Signup> {
                                     textColor: Colors.white);
                               }
                             },
-                            icon: Icon(Icons.login_rounded),
-                            label: Text("Login"),
+                            icon: Icon(Icons.app_registration),
+                            label: Text("Signup"),
                             style: ElevatedButton.styleFrom(
                               primary: Color(0xFF7041FF),
                               elevation: 0,
@@ -136,9 +167,13 @@ class _SignupState extends State<Signup> {
                             margin: const EdgeInsets.only(top: 20.0),
                             child: RichText(
                                 text: TextSpan(
-                              text: 'Signup Here',
-                              style: TextStyle(color: Colors.white),
-                            )),
+                                    text: 'Login',
+                                    style: TextStyle(color: Colors.white),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.pushReplacementNamed(
+                                            context, Login.routeName);
+                                      })),
                           )
                         ],
                       ),
