@@ -6,8 +6,12 @@ class AuthServices {
       FirebaseFirestore.instance.collection("users");
   static DocumentReference userDoc;
 
-  static Future<void> signUp() async {
+  static Future<void> signUp(Users users) async {
     await Firebase.initializeApp();
+    String dateNow = ActivityServices.dateNow();
+
+    await auth.createUserWithEmailAndPassword(
+        email: users.email, password: users.password);
 
     String msg = "";
     return msg;
