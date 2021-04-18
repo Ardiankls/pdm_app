@@ -89,23 +89,24 @@ class _LoginState extends State<Login> {
                               controller: ctrlPass,
                               obscureText: isVisible,
                               decoration: InputDecoration(
-                                  contentPadding:
-                                      new EdgeInsets.symmetric(vertical: 1.0),
-                                  labelText: "Password",
-                                  prefixIcon: Icon(Icons.vpn_key),
-                                  border: OutlineInputBorder(),
-                                  suffixIcon: new GestureDetector(
-                                    onTap: () {
-                                      setState(
-                                        () {
-                                          isVisible = !isVisible;
-                                        },
-                                      );
-                                    },
-                                    child: Icon(isVisible
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                  )),
+                                contentPadding:
+                                    new EdgeInsets.symmetric(vertical: 1.0),
+                                labelText: "Password",
+                                prefixIcon: Icon(Icons.vpn_key),
+                                border: OutlineInputBorder(),
+                                suffixIcon: new GestureDetector(
+                                  onTap: () {
+                                    setState(
+                                      () {
+                                        isVisible = !isVisible;
+                                      },
+                                    );
+                                  },
+                                  child: Icon(isVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                ),
+                              ),
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               validator: (value) {
