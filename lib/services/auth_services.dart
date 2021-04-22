@@ -6,7 +6,7 @@ class AuthServices {
       FirebaseFirestore.instance.collection("users");
   static DocumentReference userDoc;
 
-  static Future<void> signUp(Users users) async {
+  static Future<String> signUp(Users users) async {
     await Firebase.initializeApp();
     String dateNow = ActivityServices.dateNow();
     String msg = "";
@@ -18,6 +18,20 @@ class AuthServices {
 
     uid = userCredential.user.uid;
     token = await userCredential.user.getIdToken();
+
+    await userCollection.doc(uid).set({
+      'uid': uid,
+      'name': users.name,
+      'email': users.email,
+      'password': users.password,
+      'token': token,
+      'createdAt': dateNow,
+      'updatedAt': dateNow,
+    }).then((value) {
+      msg = "Success";
+    }).catchError((onError) {
+      msg = onError;
+    });
 
     return msg;
   }
