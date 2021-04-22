@@ -9,6 +9,7 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
   final ctrlEmail = TextEditingController();
+  final ctrlName = TextEditingController();
   final ctrlPass = TextEditingController();
   bool isVisible = true;
 
@@ -86,8 +87,8 @@ class _SignupState extends State<Signup> {
                           Padding(
                             padding: const EdgeInsets.only(right: 30, left: 30),
                             child: TextFormField(
-                              controller: ctrlEmail,
-                              keyboardType: TextInputType.emailAddress,
+                              controller: ctrlName,
+                              keyboardType: TextInputType.text,
                               decoration: InputDecoration(
                                 contentPadding:
                                     new EdgeInsets.symmetric(vertical: 1.0),
@@ -145,10 +146,24 @@ class _SignupState extends State<Signup> {
                           ),
                           SizedBox(height: 24),
                           ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 //melanjutkan ke tahap berikutnya
-                                Navigator.pushReplacementNamed(context, null);
+                                Users users = new Users("", ctrlName.text,
+                                    ctrlEmail.text, ctrlPass.text, "", "");
+
+                                await AuthServices.signUp(users).then((value) {
+                                  if (value == "Success") {
+                                    ActivityServices.showToast(
+                                        "Register success", Colors.greenAccent);
+                                    Navigator.pushReplacementNamed(
+                                        context, Login.routeName);
+                                  } else {
+                                    ActivityServices.showToast(
+                                        value, Colors.redAccent);
+                                  }
+                                });
+                                // Navigator.pushReplacementNamed(context, null);
                               } else {
                                 Fluttertoast.showToast(
                                     msg: "Please check the field",
