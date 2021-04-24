@@ -11,6 +11,8 @@ class _LoginState extends State<Login> {
   final ctrlEmail = TextEditingController();
   final ctrlPass = TextEditingController();
   bool isVisible = true;
+  String email;
+  String password;
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +70,7 @@ class _LoginState extends State<Login> {
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               validator: (value) {
+                                email = value;
                                 if (value.isEmpty) {
                                   return "Please fill the field!";
                                 } else {
@@ -110,6 +113,7 @@ class _LoginState extends State<Login> {
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               validator: (value) {
+                                password = value;
                                 return value.length < 6
                                     ? "Password must have at least 6 characters!"
                                     : null;
@@ -119,10 +123,26 @@ class _LoginState extends State<Login> {
                           SizedBox(height: 24),
                           ElevatedButton(
                             child: Text("Login"),
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 //melanjutkan ke tahap berikutnya
-                                Navigator.pushReplacementNamed(context, null);
+
+                                await AuthServices.signIn(email, password)
+                                    .then((value) {
+                                  if (value == "Success") {
+                                    ActivityServices.showToast(
+                                        "Login success", Colors.greenAccent);
+                                    Navigator.pushReplacementNamed(
+                                        context, Home.routeName);
+                                  } else {
+                                    ActivityServices.showToast(
+                                        value, Colors.redAccent);
+                                  }
+                                });
+                                //melanjutkan ke tahap berikutnya
+                                // Navigator.pushReplacementNamed(
+                                // context, MainMenu.routeName);
+
                               } else {
                                 Fluttertoast.showToast(
                                     msg: "Please check the field",

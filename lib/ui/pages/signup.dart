@@ -102,11 +102,7 @@ class _SignupState extends State<Signup> {
                                 if (value.isEmpty) {
                                   return "Please fill the field!";
                                 } else {
-                                  if (!EmailValidator.validate(value)) {
-                                    return "Email isn't valid!";
-                                  } else {
-                                    return null;
-                                  }
+                                  return null;
                                 }
                               },
                             ),

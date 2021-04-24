@@ -33,6 +33,46 @@ class AuthServices {
       msg = onError;
     });
 
+    auth.signOut();
+
     return msg;
+  }
+
+  static Future<String> signIn(String email, String password) async {
+    await Firebase.initializeApp();
+    String dateNow = ActivityServices.dateNow();
+    String msg = "";
+    String uid = "";
+
+    UserCredential userCredential =
+        await auth.signInWithEmailAndPassword(email: email, password: password);
+
+    uid = userCredential.user.uid;
+
+    await userCollection.doc(uid).set({
+      'isOn': '1',
+      'updatedAt': dateNow,
+    }).then((value) {
+      msg = "Success";
+    }).catchError((onError) {
+      msg = onError;
+    });
+
+    return msg;
+  }
+
+  static Future<bool> signout() async {
+    await Firebase.initializeApp();
+    String dateNow = ActivityServices.dateNow();
+    String uid = auth.currentUser.uid;
+
+    await auth.signOut().whenComplete(() {
+      userCollection.doc(uid).update({
+        'isOn': 0,
+        'updatedAt': dateNow,
+      });
+    });
+
+    return true;
   }
 }

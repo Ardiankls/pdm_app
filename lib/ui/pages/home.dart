@@ -1,6 +1,7 @@
 part of 'pages.dart';
 
 class Home extends StatefulWidget {
+  static String routeName = "/home";
   @override
   _HomeState createState() => _HomeState();
 }
