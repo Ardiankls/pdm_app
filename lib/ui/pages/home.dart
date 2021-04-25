@@ -12,9 +12,14 @@ class _HomeState extends State<Home> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xFF161E29),
-      body: Container{
-        
-      },
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Container(
+            child: ElevatedButton(
+          onPressed: () {},
+        )),
+      ),
     );
   }
 }
