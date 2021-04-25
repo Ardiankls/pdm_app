@@ -13,13 +13,20 @@ class _HomeState extends State<Home> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xFF161E29),
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Container(
-            child: ElevatedButton(
-          onPressed: () {},
-        )),
-      ),
+          width: double.infinity,
+          height: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 60),
+            child: Container(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: const Icon(Icons.person_rounded, size: 40),
+                  color: Color(0xFF7041FF),
+                  onPressed: () {
+                    Navigator.pushNamed(context, Profile.routeName);
+                  },
+                )),
+          )),
     );
   }
 }
