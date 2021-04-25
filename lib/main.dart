@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         Login.routeName: (context) => Login(),
         Signup.routeName: (context) => Signup(),
         Home.routeName: (context) => Home(),
+        Profile.routeName: (context) => Profile(),
       },
     );
   }
