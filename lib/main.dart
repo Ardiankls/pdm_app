@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.mainTheme(),
       initialRoute: '/',
       routes: {
-        '/': (context) => Splash(),
+        '/': (context) => Home(),
         Login.routeName: (context) => Login(),
         Signup.routeName: (context) => Signup(),
         Home.routeName: (context) => Home(),
