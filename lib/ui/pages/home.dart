@@ -21,13 +21,55 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: [
                   SizedBox(
-                    child: IconButton(
+                    child: Align(
                       alignment: Alignment.topRight,
-                      icon: const Icon(Icons.person_rounded, size: 40),
-                      color: Color(0xFF7041FF),
-                      onPressed: () {
-                        Navigator.pushNamed(context, Profile.routeName);
-                      },
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 12, 20, 0),
+                        child: IconButton(
+                          icon: const Icon(Icons.person_rounded, size: 40),
+                          color: Color(0xFF7041FF),
+                          onPressed: () {
+                            Navigator.pushNamed(context, Profile.routeName);
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              'Hi Ardian!',
+                              style: TextStyle(fontSize: 35),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              'Welcome Back',
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: TextButton(
+                              onPressed: null,
+                              child: Text(
+                                '+Create Project',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              style: TextButton.styleFrom(
+                                  backgroundColor: Color(0xFF7041FF),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20))),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
