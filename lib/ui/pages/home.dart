@@ -57,7 +57,9 @@ class _HomeState extends State<Home> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: TextButton(
-                              onPressed: null,
+                              onPressed: () {
+                                Navigator.pushNamed(context, Create.routeName);
+                              },
                               child: Text(
                                 '+Create Project',
                                 style: TextStyle(color: Colors.white),

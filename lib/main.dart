@@ -15,10 +15,11 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.mainTheme(),
       initialRoute: '/',
       routes: {
-        '/': (context) => Splash(),
+        '/': (context) => Create(),
         Login.routeName: (context) => Login(),
         Signup.routeName: (context) => Signup(),
         Home.routeName: (context) => Home(),
+        Create.routeName: (context) => Create(),
         Profile.routeName: (context) => Profile(),
       },
     );
