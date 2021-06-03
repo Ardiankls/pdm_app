@@ -9,7 +9,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Color(0xFF161E29),
         body: Container(
@@ -74,10 +76,56 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    child: TabBar(
+                      indicatorColor: Color(0xFF7041FF),
+                      tabs: [
+                        Tab(
+                          text: "All",
+                        ),
+                        Tab(
+                          text: "On Going",
+                        ),
+                        Tab(
+                          text: "Finished",
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        ListView(
+                          children: [
+                            Container(
+                              child: Text("All Data"),
+                            )
+                          ],
+                        ),
+                        ListView(
+                          children: [
+                            Container(
+                              child: Text("On Going Data"),
+                            )
+                          ],
+                        ),
+                        ListView(
+                          children: [
+                            Container(
+                              child: Text("Finished Data"),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
