@@ -17,7 +17,7 @@ class AuthServices {
         email: users.email, password: users.password);
 
     uid = userCredential.user.uid;
-    token = await userCredential.user.getIdToken();
+    token = await FirebaseMessaging.instance.getToken();
 
     await userCollection.doc(uid).set({
       'uid': uid,
@@ -25,6 +25,7 @@ class AuthServices {
       'email': users.email,
       'password': users.password,
       'token': token,
+      'isOn': '0',
       'createdAt': dateNow,
       'updatedAt': dateNow,
     }).then((value) {
@@ -43,14 +44,17 @@ class AuthServices {
     String dateNow = ActivityServices.dateNow();
     String msg = "";
     String uid = "";
+    String token = "";
 
     UserCredential userCredential =
         await auth.signInWithEmailAndPassword(email: email, password: password);
 
     uid = userCredential.user.uid;
+    token = await FirebaseMessaging.instance.getToken();
 
     await userCollection.doc(uid).set({
       'isOn': '1',
+      'token': token,
       'updatedAt': dateNow,
     }).then((value) {
       msg = "Success";
@@ -68,7 +72,8 @@ class AuthServices {
 
     await auth.signOut().whenComplete(() {
       userCollection.doc(uid).update({
-        'isOn': 0,
+        'isOn': '0',
+        'token': '-',
         'updatedAt': dateNow,
       });
     });

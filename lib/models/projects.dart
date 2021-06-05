@@ -3,13 +3,13 @@ part of 'models.dart';
 class Projects extends Equatable {
   final String projectId;
   final String projectTitle;
-  final DateTime projectDate;
+  final String projectDate;
   final String projectMusic;
   final String projectDrive;
   final String projectBy;
   final String projectStatus;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final String createdAt;
+  final String updatedAt;
 
   Projects(
     this.projectId,

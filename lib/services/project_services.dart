@@ -13,7 +13,7 @@ class ProjectServices {
     projectDocument = await projectCollection.add({
       'projectId': projects.projectId,
       'projectTitle': projects.projectTitle,
-      'projectDate': projects.projectDate,
+      // 'projectDate': projects.projectDate,
       'projectMusic': projects.projectMusic,
       'projectDrive': projects.projectDrive,
       'projectStatus': projects.projectStatus,
