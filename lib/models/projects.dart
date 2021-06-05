@@ -6,6 +6,8 @@ class Projects extends Equatable {
   final DateTime projectDate;
   final String projectMusic;
   final String projectDrive;
+  final String projectBy;
+  final String projectStatus;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -15,6 +17,8 @@ class Projects extends Equatable {
     this.projectDate,
     this.projectMusic,
     this.projectDrive,
+    this.projectBy,
+    this.projectStatus,
     this.createdAt,
     this.updatedAt,
   );
@@ -26,6 +30,7 @@ class Projects extends Equatable {
         projectDate,
         projectMusic,
         projectDrive,
+        projectBy,
         createdAt,
         updatedAt
       ];
