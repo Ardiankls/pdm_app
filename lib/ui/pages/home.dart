@@ -7,6 +7,45 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  CollectionReference projectCollection =
+      FirebaseFirestore.instance.collection("projects");
+
+  Widget buildBody() {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: StreamBuilder<QuerySnapshot>(
+        stream: projectCollection.snapshots(),
+        builder: (BuildContext contex, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text("Failed to load data");
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("loading");
+          }
+
+          return new ListView(
+            children: snapshot.data.docs.map((DocumentSnapshot doc) {
+              Projects projects = new Projects(
+                doc.data()['projectId'],
+                doc.data()['projectTitle'],
+                doc.data()['projectDate'],
+                doc.data()['projectDesc'],
+                doc.data()['projectMusic'],
+                doc.data()['projectDrive'],
+                doc.data()['projectBy'],
+                doc.data()['projectStatus'],
+                doc.data()['createdAt'],
+                doc.data()['updateddAt'],
+              );
+              return ProjectCard(projects: projects);
+            }).toList(),
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -96,12 +135,44 @@ class _HomeState extends State<Home> {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        ListView(
-                          children: [
-                            Container(
-                              child: Text("All Data"),
-                            )
-                          ],
+                        SizedBox(
+                          height: 200,
+                          // child: ListView(
+                          //   shrinkWrap: true,
+                          //   children: [
+                          //     StreamBuilder(
+                          //       stream: projectCollection.snapshots(),
+                          //       builder: (BuildContext contex,
+                          //           AsyncSnapshot<QuerySnapshot> snapshot) {
+                          //         if (snapshot.hasError) {
+                          //           return Text("Failed to load data");
+                          //         }
+                          //         if (snapshot.connectionState ==
+                          //             ConnectionState.waiting) {
+                          //           return CircularProgressIndicator();
+                          //         }
+                          //         return new ListView(
+                          //           children: snapshot.data.docs
+                          //               .map((DocumentSnapshot doc) {
+                          //             Projects projects = new Projects(
+                          //               doc.data()['projectId'],
+                          //               doc.data()['projectTitle'],
+                          //               doc.data()['projectDate'],
+                          //               doc.data()['projectDesc'],
+                          //               doc.data()['projectMusic'],
+                          //               doc.data()['projectDrive'],
+                          //               doc.data()['projectBy'],
+                          //               doc.data()['projectStatus'],
+                          //               doc.data()['createdAt'],
+                          //               doc.data()['updateddAt'],
+                          //             );
+                          //             return ProjectCard(projects: projects);
+                          //           }).toList(),
+                          //         );
+                          //       },
+                          //     ),
+                          //   ],
+                          // ),
                         ),
                         ListView(
                           children: [

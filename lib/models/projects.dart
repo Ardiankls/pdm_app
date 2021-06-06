@@ -4,6 +4,7 @@ class Projects extends Equatable {
   final String projectId;
   final String projectTitle;
   final String projectDate;
+  final String projectDesc;
   final String projectMusic;
   final String projectDrive;
   final String projectBy;
@@ -15,6 +16,7 @@ class Projects extends Equatable {
     this.projectId,
     this.projectTitle,
     this.projectDate,
+    this.projectDesc,
     this.projectMusic,
     this.projectDrive,
     this.projectBy,
@@ -28,6 +30,7 @@ class Projects extends Equatable {
         projectId,
         projectTitle,
         projectDate,
+        projectDesc,
         projectMusic,
         projectDrive,
         projectBy,

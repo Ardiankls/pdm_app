@@ -14,6 +14,7 @@ class ProjectServices {
       'projectId': projects.projectId,
       'projectTitle': projects.projectTitle,
       // 'projectDate': projects.projectDate,
+      'projectDesc': projects.projectDesc,
       'projectMusic': projects.projectMusic,
       'projectDrive': projects.projectDrive,
       'projectStatus': projects.projectStatus,

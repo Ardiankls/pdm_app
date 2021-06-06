@@ -146,6 +146,7 @@ class _CreateState extends State<Create> {
                                         "",
                                         ctrlProTitle.text,
                                         "-",
+                                        ctrlProDesc.text,
                                         ctrlProMusic.text,
                                         ctrlProDrive.text,
                                         FirebaseAuth.instance.currentUser.uid,
