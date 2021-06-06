@@ -17,6 +17,7 @@ class _ProjectCardState extends State<ProjectCard> {
       elevation: 0,
       margin: EdgeInsets.all(16),
       child: Container(
+        color: Color(0xFF7041FF),
         padding: EdgeInsets.all(8),
         child: ListTile(
           leading: CircleAvatar(
@@ -29,8 +30,8 @@ class _ProjectCardState extends State<ProjectCard> {
             softWrap: true,
           ),
           subtitle: Text(
-            "default",
-            // project.projectDesc,
+            // "default",
+            project.projectDesc,
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal),
             maxLines: 1,
           ),
