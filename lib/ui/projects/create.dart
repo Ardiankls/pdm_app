@@ -12,6 +12,12 @@ final ctrlProDesc = TextEditingController();
 final ctrlProMusic = TextEditingController();
 final ctrlProDrive = TextEditingController();
 String dateNow = ActivityServices.dateNow();
+// DateTime datePicked;
+String proDate;
+
+// Widget convertDate(){
+//   return
+// }
 
 @override
 void dispose() {
@@ -32,6 +38,8 @@ void clearForm() {
 // void
 
 class _CreateState extends State<Create> {
+  DateTime _dateTime;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,6 +111,40 @@ class _CreateState extends State<Create> {
                               }
                             },
                           ),
+                          SizedBox(height: 0),
+                          Column(
+                            children: [
+                              // Text("Due Date"),
+                              // CalendarDatePicker(
+                              //   lastDate: DateTime(22222),
+                              //   onDateChanged: (date) {},
+                              //   firstDate: DateTime(2010),
+                              //   initialDate: DateTime.now(),
+                              // ),
+                              Text(_dateTime == null
+                                  ? 'Pick the due date'
+                                  : _dateTime.toString()),
+                              ElevatedButton(
+                                onPressed: () {
+                                  showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(2021),
+                                    lastDate: DateTime(2060),
+                                  ).then((date) {
+                                    setState(() {
+                                      _dateTime = date;
+                                      var dateFormat =
+                                          new DateFormat('yyyy-MM-dd');
+                                      var datePicked = dateFormat.format(date);
+                                      proDate = datePicked.toString();
+                                    });
+                                  });
+                                },
+                                child: Text('Pick date'),
+                              ),
+                            ],
+                          ),
                           SizedBox(height: 40),
                           TextFormField(
                             controller: ctrlProDesc,
@@ -145,12 +187,12 @@ class _CreateState extends State<Create> {
                                     Projects projects = Projects(
                                         "",
                                         ctrlProTitle.text,
-                                        "-",
+                                        proDate,
                                         ctrlProDesc.text,
                                         ctrlProMusic.text,
                                         ctrlProDrive.text,
                                         FirebaseAuth.instance.currentUser.uid,
-                                        "1",
+                                        "OnGoing",
                                         dateNow,
                                         dateNow);
                                     await ProjectServices.addProject(projects)
