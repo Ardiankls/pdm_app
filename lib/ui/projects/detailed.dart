@@ -119,26 +119,47 @@ class _DetailedState extends State<Detailed> {
                                     ],
                                   ),
                                   SizedBox(height: 40),
-                                  SizedBox(
-                                    child: Align(
-                                        alignment: Alignment.topRight,
-                                        child: proStatus == "OnGoing"
-                                            ? ElevatedButton(
-                                                onPressed: () async {
-                                                  await ProjectServices
-                                                      .updateStatus(projects);
-                                                  Navigator
-                                                      .pushReplacementNamed(
-                                                          context,
-                                                          Home.routeName);
-                                                },
-                                                child: Text("Finish"),
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Color(0xFF7041FF),
-                                                  shape: StadiumBorder(),
-                                                ),
-                                              )
-                                            : Container()),
+                                  Stack(
+                                    children: [
+                                      SizedBox(
+                                          child: ElevatedButton(
+                                        onPressed: () async {
+                                          await ProjectServices.deleteProject(
+                                              projects);
+                                          Navigator.pushReplacementNamed(
+                                              context, Home.routeName);
+                                        },
+                                        child: Text("Delete"),
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Color(0xFFc91d0a),
+                                          shape: StadiumBorder(),
+                                        ),
+                                      )),
+                                      SizedBox(
+                                        child: Align(
+                                            alignment: Alignment.topRight,
+                                            child: proStatus == "OnGoing"
+                                                ? ElevatedButton(
+                                                    onPressed: () async {
+                                                      await ProjectServices
+                                                          .updateStatus(
+                                                              projects);
+                                                      Navigator
+                                                          .pushReplacementNamed(
+                                                              context,
+                                                              Home.routeName);
+                                                    },
+                                                    child: Text("Finish"),
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      primary:
+                                                          Color(0xFF18b500),
+                                                      shape: StadiumBorder(),
+                                                    ),
+                                                  )
+                                                : Container()),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

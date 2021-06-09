@@ -48,4 +48,15 @@ class ProjectServices {
 
     return msg;
   }
+
+  static Future<bool> deleteProject(Projects projects) async {
+    bool hsl = true;
+    await Firebase.initializeApp();
+    await projectCollection.doc(projects.projectId).delete().then((value) {
+      hsl = true;
+    }).catchError((onError) {
+      hsl = false;
+    });
+    return hsl;
+  }
 }

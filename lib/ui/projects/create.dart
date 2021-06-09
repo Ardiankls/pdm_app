@@ -155,6 +155,15 @@ class _CreateState extends State<Create> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
                             ),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please fill the field!";
+                              } else {
+                                return null;
+                              }
+                            },
                           ),
                           SizedBox(height: 40),
                           TextFormField(

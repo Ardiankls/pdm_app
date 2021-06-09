@@ -10,7 +10,11 @@ class _HomeState extends State<Home> {
   CollectionReference projectCollection =
       FirebaseFirestore.instance.collection("projects");
 
-  Widget buildBody() {
+  static FirebaseAuth auth = FirebaseAuth.instance;
+  CollectionReference userCollection =
+      FirebaseFirestore.instance.collection("users");
+
+  Widget allList() {
     return ListView(
       children: [
         SingleChildScrollView(
@@ -51,6 +55,106 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget onGoingList() {
+    return ListView(
+      children: [
+        SingleChildScrollView(
+          child: StreamBuilder(
+            stream: projectCollection
+                .where('projectStatus', isEqualTo: 'OnGoing')
+                .snapshots(),
+            builder:
+                (BuildContext contex, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text("Failed to load data");
+              }
+              if (!snapshot.hasData) {
+                return Text("Currently There is No Video Projects");
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+              return new Column(
+                children: snapshot.data.docs.map((DocumentSnapshot doc) {
+                  Projects projects = new Projects(
+                    doc.data()['projectId'],
+                    doc.data()['projectTitle'],
+                    doc.data()['projectDate'],
+                    doc.data()['projectDesc'],
+                    doc.data()['projectMusic'],
+                    doc.data()['projectDrive'],
+                    doc.data()['projectBy'],
+                    doc.data()['projectStatus'],
+                    doc.data()['createdAt'],
+                    doc.data()['updateddAt'],
+                  );
+                  return ProjectCard(projects: projects);
+                }).toList(),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget finishedList() {
+    return ListView(
+      children: [
+        SingleChildScrollView(
+          child: StreamBuilder(
+            stream: projectCollection
+                .where('projectStatus', isEqualTo: 'Finished')
+                .snapshots(),
+            builder:
+                (BuildContext contex, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text("Failed to load data");
+              }
+              if (!snapshot.hasData) {
+                return Text("Currently There is No Video Projects");
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+              return new Column(
+                children: snapshot.data.docs.map((DocumentSnapshot doc) {
+                  Projects projects = new Projects(
+                    doc.data()['projectId'],
+                    doc.data()['projectTitle'],
+                    doc.data()['projectDate'],
+                    doc.data()['projectDesc'],
+                    doc.data()['projectMusic'],
+                    doc.data()['projectDrive'],
+                    doc.data()['projectBy'],
+                    doc.data()['projectStatus'],
+                    doc.data()['createdAt'],
+                    doc.data()['updateddAt'],
+                  );
+                  return ProjectCard(projects: projects);
+                }).toList(),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  // int a =
+
+  Future<void> getUser() async {
+    await Firebase.initializeApp();
+    String uid = auth.currentUser.uid;
+    await userCollection.doc(uid).get().then((value) {
+      setState(() {
+        name = value['name'];
+      });
+    });
+  }
+
+  String name;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -89,7 +193,7 @@ class _HomeState extends State<Home> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              'Hi Ardian!',
+                              ['val'],
                               style: TextStyle(fontSize: 35),
                             ),
                           ),
@@ -140,15 +244,9 @@ class _HomeState extends State<Home> {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        buildBody(),
-                        buildBody(),
-                        ListView(
-                          children: [
-                            Container(
-                              child: Text("Finished Data"),
-                            )
-                          ],
-                        )
+                        allList(),
+                        onGoingList(),
+                        finishedList(),
                       ],
                     ),
                   )
