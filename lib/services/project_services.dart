@@ -32,4 +32,20 @@ class ProjectServices {
       return false;
     }
   }
+
+  static Future<String> updateStatus(Projects projects) async {
+    await Firebase.initializeApp();
+    String dateNow = ActivityServices.dateNow();
+    String msg;
+    await projectCollection.doc(projects.projectId).update({
+      'projectStatus': 'Finished',
+      'updatedAt': dateNow,
+    }).then((value) {
+      msg = "success";
+    }).catchError((onError) {
+      msg = onError;
+    });
+
+    return msg;
+  }
 }

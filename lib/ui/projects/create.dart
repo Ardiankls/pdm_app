@@ -187,7 +187,7 @@ class _CreateState extends State<Create> {
                                     Projects projects = Projects(
                                         "",
                                         ctrlProTitle.text,
-                                        proDate,
+                                        projDate,
                                         ctrlProDesc.text,
                                         ctrlProMusic.text,
                                         ctrlProDrive.text,

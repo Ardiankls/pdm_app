@@ -21,7 +21,9 @@ class _ProjectCardState extends State<ProjectCard> {
         elevation: 0,
         margin: EdgeInsets.all(16),
         child: Container(
-          color: Color(0xFF7041FF),
+          color: (project.projectStatus == "OnGoing"
+              ? Color(0xFF7041FF)
+              : Color(0xFF4d4d4d)),
           padding: EdgeInsets.all(8),
           child: ListTile(
             leading: CircleAvatar(

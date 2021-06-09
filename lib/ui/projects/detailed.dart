@@ -3,6 +3,7 @@ part of '../pages/pages.dart';
 class Detailed extends StatefulWidget {
   @override
   _DetailedState createState() => _DetailedState();
+  static String routeName = "/detailed";
 }
 
 String proId;
@@ -14,19 +15,17 @@ String proDrive;
 String proStatus;
 
 @override
-Widget build(BuildContext context) {
-  Projects projects = ModalRoute.of(context).settings.arguments;
-  proId = projects.projectId;
-  proTitle = projects.projectTitle;
-  proDesc = projects.projectDesc;
-  proDate = projects.projectDate;
-  proDrive = projects.projectDrive;
-  proStatus = projects.projectStatus;
-}
-
 class _DetailedState extends State<Detailed> {
   @override
   Widget build(BuildContext context) {
+    Projects projects = ModalRoute.of(context).settings.arguments;
+    proId = projects.projectId;
+    proTitle = projects.projectTitle;
+    proDesc = projects.projectDesc;
+    proDate = projects.projectDate;
+    // proMusic = projects.projectMusic;
+    proDrive = projects.projectDrive;
+    proStatus = projects.projectStatus;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xFF161E29),
@@ -76,63 +75,72 @@ class _DetailedState extends State<Detailed> {
                           children: [
                             Container(
                               child: Column(
-                                children: [],
-                              ),
-                            ),
-                            SizedBox(height: 80),
-                            Column(
-                              children: [
-                                Text("Title"),
-                                Text("proTItle"),
-                              ],
-                            ),
-                            SizedBox(height: 80),
-                            Column(
-                              children: [
-                                Text("Desc"),
-                                Text("proDesc"),
-                              ],
-                            ),
-                            SizedBox(height: 80),
-                            Column(
-                              children: [
-                                Text("Date"),
-                                Text("proDate"),
-                              ],
-                            ),
-                            SizedBox(height: 80),
-                            Column(
-                              children: [
-                                Text("Music"),
-                                Text("proMusic"),
-                              ],
-                            ),
-                            SizedBox(height: 80),
-                            Column(
-                              children: [
-                                Text("Drive"),
-                                Text("proDrive"),
-                              ],
-                            ),
-                            SizedBox(height: 80),
-                            Column(
-                              children: [
-                                Text("Stat"),
-                                Text("proStat"),
-                              ],
-                            ),
-                            SizedBox(height: 40),
-                            SizedBox(
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text("Finish"),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xFF7041FF),
-                                    shape: StadiumBorder(),
+                                children: [
+                                  SizedBox(height: 80),
+                                  Column(
+                                    children: [
+                                      Text("Title"),
+                                      Text(proTitle),
+                                    ],
                                   ),
-                                ),
+                                  SizedBox(height: 80),
+                                  Column(
+                                    children: [
+                                      Text("Desc"),
+                                      Text(proDesc),
+                                    ],
+                                  ),
+                                  SizedBox(height: 80),
+                                  Column(
+                                    children: [
+                                      Text("Date"),
+                                      Text(proDate),
+                                    ],
+                                  ),
+                                  SizedBox(height: 80),
+                                  Column(
+                                    children: [
+                                      Text("Music"),
+                                      Text(proMusic == null ? "" : proMusic),
+                                    ],
+                                  ),
+                                  SizedBox(height: 80),
+                                  Column(
+                                    children: [
+                                      Text("Drive"),
+                                      Text(proDrive == null ? "" : proDrive),
+                                    ],
+                                  ),
+                                  SizedBox(height: 80),
+                                  Column(
+                                    children: [
+                                      Text("Stat"),
+                                      Text(proStatus),
+                                    ],
+                                  ),
+                                  SizedBox(height: 40),
+                                  SizedBox(
+                                    child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: proStatus == "OnGoing"
+                                            ? ElevatedButton(
+                                                onPressed: () async {
+                                                  await ProjectServices
+                                                      .updateStatus(projects);
+                                                  Navigator
+                                                      .pushReplacementNamed(
+                                                          context,
+                                                          Home.routeName);
+                                                },
+                                                child: Text("Finish"),
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Color(0xFF7041FF),
+                                                  shape: StadiumBorder(),
+                                                ),
+                                              )
+                                            : Container()),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
