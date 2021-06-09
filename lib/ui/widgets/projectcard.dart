@@ -13,31 +13,36 @@ class _ProjectCardState extends State<ProjectCard> {
   Widget build(BuildContext context) {
     Projects project = widget.projects;
 
-    return Card(
-      elevation: 0,
-      margin: EdgeInsets.all(16),
-      child: Container(
-        color: Color(0xFF7041FF),
-        padding: EdgeInsets.all(8),
-        child: ListTile(
-          leading: CircleAvatar(
-            radius: 24,
-          ),
-          title: Text(
-            project.projectTitle,
-            style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-            maxLines: 1,
-            softWrap: true,
-          ),
-          subtitle: Text(
-            // "default",
-            project.projectDesc,
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal),
-            maxLines: 1,
-          ),
-          trailing: IconButton(
-            icon: Icon(CupertinoIcons.trash_circle),
-            onPressed: null,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, Detailed.routeName, arguments: project);
+      },
+      child: Card(
+        elevation: 0,
+        margin: EdgeInsets.all(16),
+        child: Container(
+          color: Color(0xFF7041FF),
+          padding: EdgeInsets.all(8),
+          child: ListTile(
+            leading: CircleAvatar(
+              radius: 24,
+            ),
+            title: Text(
+              project.projectTitle,
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+              maxLines: 1,
+              softWrap: true,
+            ),
+            subtitle: Text(
+              // "default",
+              project.projectDesc,
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal),
+              maxLines: 1,
+            ),
+            trailing: IconButton(
+              icon: Icon(CupertinoIcons.trash_circle),
+              onPressed: null,
+            ),
           ),
         ),
       ),

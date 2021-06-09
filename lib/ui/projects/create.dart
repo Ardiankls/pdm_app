@@ -13,7 +13,7 @@ final ctrlProMusic = TextEditingController();
 final ctrlProDrive = TextEditingController();
 String dateNow = ActivityServices.dateNow();
 // DateTime datePicked;
-String proDate;
+String projDate;
 
 // Widget convertDate(){
 //   return
@@ -137,7 +137,7 @@ class _CreateState extends State<Create> {
                                       var dateFormat =
                                           new DateFormat('yyyy-MM-dd');
                                       var datePicked = dateFormat.format(date);
-                                      proDate = datePicked.toString();
+                                      projDate = datePicked.toString();
                                     });
                                   });
                                 },

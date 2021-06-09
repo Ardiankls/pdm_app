@@ -15,5 +15,6 @@ part 'splash.dart';
 part 'login.dart';
 part 'signup.dart';
 part 'home.dart';
+part '../projects/detailed.dart';
 part 'profile.dart';
 part '../projects/create.dart';
